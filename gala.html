@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wala lang am lonli</title>
+  <style>
+    
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #ffe4e1;
+      color: #6a1b9a;
+    }
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      margin: 15px;
+      border: 2px solid #6a1b9a;
+      cursor: pointer;
+      border-radius: 12px;
+      background-color: #f8bbd0;
+      color: #6a1b9a;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    button:hover {
+      background-color: #f48fb1;
+      transform: scale(1.1);
+    }
+    .no {
+      border-color: #d32f2f;
+    }
+    img {
+      max-width: 300px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .slide {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .cute-card {
+      background: #fff1f8;
+      border: 2px dashed #f48fb1;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    .cute-card p {
+      font-size: 1.2em;
+      color: #e91e63;
+    }
+    .heart-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/7eR7XDb.png') repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+    #selected-date {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #6a1b9a;
+    }
+    input[type="date"] {
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    color: #6a1b9a;
+    background-color: #fff1f8;
+    border: 2px solid #f8bbd0;
+    border-radius: 12px;
+    padding: 10px 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+  }
+
+  input[type="date"]:focus {
+    outline: none;
+    background-color: #fce4ec;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+  }
+
+  input[type="date"]::placeholder {
+    color: #ba68c8;
+    font-style: italic;
+  }
+  </style>
+</head>
+<body>
+  <!-- Slide 1 -->
+  <div id="slide-one" class="slide active">
+    <h1>rarararraraararar gala us?</h1>
+    <img src="https://media1.tenor.com/m/_l_5p1vtSE0AAAAd/chiens-funnyanimals.gif" alt="Chill Guy GIF">
+    <div>
+      <button class="yes" onclick="goToSlide('slide-two')">Yes</button>
+      <button class="no" onmouseover="moveButton(this)">No</button>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div id="slide-two" class="slide">
+    <h1>hrherhehrehrhe knew it! 🥰</h1>
+    <img src="https://media1.tenor.com/m/N7FRYKcRUbsAAAAC/green-cat-alien-cat.gif" alt="Green Alien Cat GIF">
+    <p>now pick:</p>
+    <input type="date" id="date" />
+    <button onclick="confirmDate()">u shor</button>
+  </div>
+
+  <!-- Slide 3 -->
+  <div id="slide-three" class="slide">
+    <h1>huzza huzza, yehey! </h1>
+    <p>ur chosen date is:</p>
+    <p id="selected-date" style="font-size: 1.5em; font-weight: bold;"></p>
+    <img src="https://media1.tenor.com/m/QfDCziYEjg0AAAAC/funny-cat.gif" alt="Funny Cat GIF">
+     <!-- Audio player for the song -->
+  <audio id="song" autoplay loop>
+    <source src="naega.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  </div>
+
+  <script>
+    function moveButton(button) {
+      const x = Math.random() * (window.innerWidth - button.offsetWidth);
+      const y = Math.random() * (window.innerHeight - button.offsetHeight);
+      button.style.position = 'absolute';
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    }
+
+    function goToSlide(slideId) {
+      // Hide all slides
+      document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+      // Show the target slide
+      document.getElementById(slideId).classList.add('active');
+
+      // Trigger audio to start playing when reaching the final slide
+      if (slideId === 'slide-three') {
+        const audio = document.getElementById('song');
+        audio.play();  // Play the song when the final slide is active
+      }
+    }
+
+    function confirmDate() {
+      const dateInput = document.getElementById('date').value;
+      if (dateInput) {
+        // Set the selected date in the third slide
+        document.getElementById('selected-date').textContent = dateInput;
+        // Transition to the third slide
+        goToSlide('slide-three');
+      } else {
+        alert('Please pick a date! 🗓️');
+      }
+    }
+  </script>
+</body>
+</html>
